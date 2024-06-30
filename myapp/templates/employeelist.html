@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+
+{%block main_block%}
+<div class="mt-5 d-flex justify-content-center">
+        <h2>Employee List</h2>
+</div>
+
+<div class="container border p-5 shadow mt-5">
+
+        <a href="{%url 'employee-create' %}" class="btn btn-outline-success">Add New Employee</a>
+
+        <table class="table">
+                <tr>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                </tr>
+                {%for m in data%}
+                <tr>
+                        <td>{{m.name}}</td>
+                        <td>{{m.department}}</td>
+                        <td>{{m.salary}}</td>
+                        <td>{{m.location}}</td>
+                        <td>{{m.email}}</td>
+                        <td>{{m.address}}</td>
+                        <td>
+                                <a href="{%url 'employee-detail' m.id%}" class="btn btn-outline-info">view</a>
+
+                                <a href="{%url 'employee-delete' m.id%}" class="btn btn-outline-danger">remove</a>
+
+                                <a href="{%url 'employee-edit' m.id%}" class="btn btn-outline-warning">edit</a>
+                        </td>
+                </tr>
+                {%endfor%}
+
+        </table>
+        {%endblock%}

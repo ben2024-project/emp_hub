@@ -1,0 +1,91 @@
+from django.db import models
+
+# Create your models here.
+
+class Employee(models.Model):
+
+    name=models.CharField(max_length=200)
+
+    department=models.CharField(max_length=200)
+
+    salary=models.PositiveIntegerField()
+
+    location=models.CharField(max_length=200)
+
+    email=models.EmailField()
+
+    address=models.CharField(max_length=200)
+
+ORM query for inserting a new record
+
+> Employee.objects.create(field=value, filed=vale,field=value)
+
+>Employee.objects.create(
+
+name="sidharth",
+department="marketing", 
+salary=30000,
+location="ekm", 
+email="sid123@gmai.com", 
+address="ekm")
+
+ORM query for listing
+
+
+qs=Employee.objects.all()
+
+emp_obj=Employee.objects.get(id=2) 
+
+em=Employee.objects.filter(department='sales') 
+
+em=Employee.objects.filter(department='marketing',location='ktm')
+
+e=Employee.objects.filter(salary__lt=30000) 
+
+__gt
+
+__lt  
+
+__gte
+
+__lte
+
+>__iexact (case insensitive)
+
+>__icontains
+
+m=Employee.objects.filter(location__iexact='EKM')
+
+c=Employee.objects.filter(department__icontains='ae') 
+
+n=Employee.objects.filter(address__in=['ekm','tri']) 
+
+ORM query for update 
+
+Employee.objects.filter(id=4).update(name="Anvin",salary=35000) 
+
+ORM query for delete
+
+Employee.objects.filter(id=6).delete() 
+
+ORM query for sorting
+
+ qs=Employee.objects.all().order_by('salary')  #asc
+
+qs=Employee.objects.all().order_by('-salary')  #desc
+
+Highst salary
+
+qs=Employee.objects.all().order_by('-salary') [0]
+
+s=Employee.objects.all().order_by('-salary') [0:4]
+
+aggregate ORM query
+
+(Max,Min,Sum,Count,Avg)
+
+from django.db.models import Max
+Highst_salary=Employee.objects.aggregate(Max('salary'))
+
+from django.db.models import Min
+low_salary=Employee.objects.aggregate(Min('salary')) 
